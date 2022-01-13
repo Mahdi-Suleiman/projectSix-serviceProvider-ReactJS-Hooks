@@ -1,28 +1,28 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import "./cart.css"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import CartItem from '../cart-item/cart-item'
 
-function Cart({setLoggedUser}) {
-    const [user,setUser] = useState(JSON.parse(localStorage.getItem("loggedUser")));
+function Cart({ setLoggedUser }) {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("loggedUser")));
     const removeItem = (item) => {
-            const existingCartItem = user.cartItems.find(
+        const existingCartItem = user.cartItems.find(
             cartItem => cartItem.id === item.id)
-            user.cartItems.splice(user.cartItems.indexOf(existingCartItem),1)
-            localStorage.setItem("loggedUser" , JSON.stringify(user))
-            const allUsers = JSON.parse(localStorage.getItem("users"));
-            const filteredAllUsers = allUsers.filter((data) => user.id !== data.id);
-            filteredAllUsers.push(user);
-            localStorage.setItem("users", JSON.stringify(filteredAllUsers));
-            setUser(JSON.parse(localStorage.getItem("loggedUser")))
-            setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
+        user.cartItems.splice(user.cartItems.indexOf(existingCartItem), 1)
+        localStorage.setItem("loggedUser", JSON.stringify(user))
+        const allUsers = JSON.parse(localStorage.getItem("users"));
+        const filteredAllUsers = allUsers.filter((data) => user.id !== data.id);
+        filteredAllUsers.push(user);
+        localStorage.setItem("users", JSON.stringify(filteredAllUsers));
+        setUser(JSON.parse(localStorage.getItem("loggedUser")))
+        setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
     }
 
     const decreaseQuantity = (item) => {
         const existingCartItem = user.cartItems.find(cartItem => cartItem.id === item.id)
-        if(existingCartItem.quantity === 1){
-           user.cartItems.splice(user.cartItems.indexOf(existingCartItem),1)
-           localStorage.setItem("loggedUser" , JSON.stringify(user))
+        if (existingCartItem.quantity === 1) {
+            user.cartItems.splice(user.cartItems.indexOf(existingCartItem), 1)
+            localStorage.setItem("loggedUser", JSON.stringify(user))
             const allUsers = JSON.parse(localStorage.getItem("users"));
             const filteredAllUsers = allUsers.filter((data) => user.id !== data.id);
             filteredAllUsers.push(user);
@@ -30,45 +30,45 @@ function Cart({setLoggedUser}) {
             setUser(JSON.parse(localStorage.getItem("loggedUser")))
             setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
         } else {
-            user.cartItems.map(cartItem => cartItem.id === item.id ? cartItem.quantity -=1 : cartItem) 
-            localStorage.setItem("loggedUser" , JSON.stringify(user))
+            user.cartItems.map(cartItem => cartItem.id === item.id ? cartItem.quantity -= 1 : cartItem)
+            localStorage.setItem("loggedUser", JSON.stringify(user))
             const allUsers = JSON.parse(localStorage.getItem("users"));
             const filteredAllUsers = allUsers.filter((data) => user.id !== data.id);
             filteredAllUsers.push(user);
             localStorage.setItem("users", JSON.stringify(filteredAllUsers));
-            setUser(JSON.parse(localStorage.getItem("loggedUser"))) 
-            setLoggedUser(JSON.parse(localStorage.getItem("loggedUser"))) 
+            setUser(JSON.parse(localStorage.getItem("loggedUser")))
+            setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
         }
     }
 
     const addToCart = (item) => {
-          const existingCartItem = user.cartItems.find(
+        const existingCartItem = user.cartItems.find(
             cartItem => cartItem.id === item.id
         )
-        if(existingCartItem){
-          user.cartItems.map(cartItem => cartItem.id === item.id ? cartItem.quantity +=1 : cartItem)
-          localStorage.setItem("loggedUser" , JSON.stringify(user))
-          const allUsers = JSON.parse(localStorage.getItem("users"));
-          const filteredAllUsers = allUsers.filter((data) => user.id !== data.id);
-          filteredAllUsers.push(user);
-          localStorage.setItem("users", JSON.stringify(filteredAllUsers));
-          setUser(JSON.parse(localStorage.getItem("loggedUser")))
-          setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
-       } else {
-         user.cartItems.push({...item, quantity: 1})
-         localStorage.setItem("loggedUser" , JSON.stringify(user))
-         const allUsers = JSON.parse(localStorage.getItem("users"));
-          const filteredAllUsers = allUsers.filter((data) => user.id !== data.id);
-          filteredAllUsers.push(user);
-          localStorage.setItem("users", JSON.stringify(filteredAllUsers));
-          setUser(JSON.parse(localStorage.getItem("loggedUser")))
-          setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
-       }
-    }  
+        if (existingCartItem) {
+            user.cartItems.map(cartItem => cartItem.id === item.id ? cartItem.quantity += 1 : cartItem)
+            localStorage.setItem("loggedUser", JSON.stringify(user))
+            const allUsers = JSON.parse(localStorage.getItem("users"));
+            const filteredAllUsers = allUsers.filter((data) => user.id !== data.id);
+            filteredAllUsers.push(user);
+            localStorage.setItem("users", JSON.stringify(filteredAllUsers));
+            setUser(JSON.parse(localStorage.getItem("loggedUser")))
+            setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
+        } else {
+            user.cartItems.push({ ...item, quantity: 1 })
+            localStorage.setItem("loggedUser", JSON.stringify(user))
+            const allUsers = JSON.parse(localStorage.getItem("users"));
+            const filteredAllUsers = allUsers.filter((data) => user.id !== data.id);
+            filteredAllUsers.push(user);
+            localStorage.setItem("users", JSON.stringify(filteredAllUsers));
+            setUser(JSON.parse(localStorage.getItem("loggedUser")))
+            setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
+        }
+    }
 
     return (
         <div className="checkout-page">
-                {user.cartItems.length ? <div className="checkout-header">
+            {user.cartItems.length ? <div className="checkout-header">
                 <div className="header-block">
                     <span>Product</span>
                 </div>
@@ -84,15 +84,15 @@ function Cart({setLoggedUser}) {
                 <div className="header-block">
                     <span>Remove</span>
                 </div>
-            </div> : null }
-            
+            </div> : null}
+
             {user.cartItems.length ? null : <div className="empty-message-checkout">
                 <h1>Your Cart Is Empty</h1>
-                <Link to="/games"><button type="button" className="go-to-shop">Go To Shop</button></Link>
-                </div>}
-                {user.cartItems.map(element => <CartItem key={element.id} cartItem={element} removeItem={removeItem} decreaseQuantity={decreaseQuantity} addToCart={addToCart}/>)}
-                {user.cartItems.length ? <div className="total">
-                <span>Total: ${user.cartItems.reduce((total,item) => total + item.quantity * item.price, 0)}</span>
+                <Link to="/glasses"><button type="button" className="go-to-shop">Go To Shop</button></Link>
+            </div>}
+            {user.cartItems.map(element => <CartItem key={element.id} cartItem={element} removeItem={removeItem} decreaseQuantity={decreaseQuantity} addToCart={addToCart} />)}
+            {user.cartItems.length ? <div className="total">
+                <span>Total: ${user.cartItems.reduce((total, item) => total + item.quantity * item.price, 0)}</span>
                 <Link to="/checkout"><button type="button" className="confirm-buy">Go to Checkout</button></Link>
             </div> : ""}
         </div>

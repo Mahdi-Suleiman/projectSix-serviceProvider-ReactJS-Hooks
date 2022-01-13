@@ -6,10 +6,10 @@ import HomePage from './pages/homepage/homepage';
 import Footer from './components/footer/footer';
 import LoginPage from "./pages/login-page/login-page"
 import RegisterPage from "./pages/register-page/register-page"
-import GamesPage from './pages/games-page/games-page';
+import GlassesPage from './pages/glasses-page/glasses-page';
 import RoomsPage from './pages/rooms-page/rooms-page';
-import DetailedGame from './components/detailed-game/detailed-game';
-import glasses from './data/games/glasses';
+import DetailedGlasses from './components/detailed-glass/detailed-glass';
+import glasses from './data/glasses/glasses';
 import rooms from './data/rooms/rooms';
 import DetailedRoom from './components/detailed-room/detailed-room';
 import CartPage from './pages/cart-page/cart-page';
@@ -27,10 +27,10 @@ function App() {
         <Route exact path="/" element={<HomePage />} />
         <Route exact path="/login" element={<LoginPage setLoggedUser={setLoggedUser} />} />
         <Route exact path="/register" element={<RegisterPage setLoggedUser={setLoggedUser} />} />
-        <Route exact path="/games" element={<GamesPage />} />
+        <Route exact path="/glasses" element={<GlassesPage />} />
         <Route exact path="/rooms" element={<RoomsPage />} />
-        <Route exact path="/games/:title" element={<DetailedGame games={glasses} setLoggedUser={setLoggedUser} />} />
-        <Route exact path="/games/:title" element={<DetailedGame setLoggedUser={setLoggedUser} />} />
+        <Route exact path="/glasses/:title" element={<DetailedGlasses glasses={glasses} setLoggedUser={setLoggedUser} />} />
+        <Route exact path="/glasses/:title" element={<DetailedGlasses setLoggedUser={setLoggedUser} />} />
         <Route exact path="/rooms/:title" element={<DetailedRoom rooms={rooms} />} />
         <Route exact path="/cart" element={<CartPage setLoggedUser={setLoggedUser} />} />
         <Route exact path="/checkout" element={<CheckoutPage setLoggedUser={setLoggedUser} />} />

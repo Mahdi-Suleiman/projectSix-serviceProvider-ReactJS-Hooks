@@ -1,0 +1,126 @@
+@import "https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Saira:wght@200&display=swap";
+
+footer {
+    background-image: linear-gradient(140deg, #FFFFFF00 0%, #EBEDEFDE 100%);
+    padding: 1em;
+}
+
+.footer-container {
+    color: black;
+    display: grid;
+    gap: 1em;
+    grid-template-areas: "location social aboutus";
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+        width: 100px;
+    }
+
+}
+
+.footer-aboutus {
+    // margin-top: 1em;
+
+    grid-area: aboutus;
+
+}
+
+.footer-logo {
+    width: 100px;
+}
+
+.footer-scoial {
+    grid-area: social;
+    width: 100%;
+}
+
+
+.get-in-ontact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .footerIcons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // margin: 2rem 0;
+
+        i {
+            font-size: 1.3rem;
+            color: black;
+            // padding-right: 2rem;
+            padding: 1em;
+            transition: 0.5s;
+        }
+
+        a {
+            &:hover {
+                i {
+                    transform: translateY(2px);
+                }
+            }
+        }
+    }
+
+}
+
+.footer-contactUs {
+    grid-area: location;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    // margin-top: 1.5rem;
+    text-align: center;
+}
+
+.footer-contact-info {
+    p {
+        line-height: 3;
+    }
+}
+
+.copyright {
+    text-align: center;
+    // margin: 0;
+    color: black;
+}
+
+@media screen and (max-width: 570px) {
+    .footer-container {
+        // font-size: 0.8rem;
+        grid-template-areas: "location""social""aboutus";
+        grid-template-columns: unset;
+        // grid-template-rows: 1fr 1fr 1fr;
+        justify-content: unset;
+
+
+        img {
+            width: 75px;
+        }
+
+        * {
+            text-align: center;
+        }
+    }
+
+    .footerIcons {
+        i {
+            font-size: 1rem;
+            // padding-right: 1rem;
+        }
+    }
+
+    .footer-contactUs {
+        // align-self: flex-start;
+        // margin-top: 3rem;
+    }
+
+    .copyright {
+        margin-top: 1em;
+    }
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./reservation-form.css";
+import "./reservation-form.scss";
 import Swal from "sweetalert2";
 
 function ReservationForm({ service }) {
@@ -134,20 +134,21 @@ function ReservationForm({ service }) {
     <div className="reservation-form-container">
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Type of Service: {service.title}</label>
+          <label>{service.title}</label>
+          <br />
         </div>
-        <div>
+        {/* <div>
           <label>Full Name</label>
           <input
             type="text"
             value={loggedUserNow.firstName + " " + loggedUserNow.lastName}
             readOnly
           />
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <label>Email</label>
           <input type="text" value={loggedUserNow.email} readOnly />
-        </div>
+        </div> */}
         <div>
           <label>Mobile Number</label>
           <input
@@ -160,7 +161,7 @@ function ReservationForm({ service }) {
           />
         </div>
         <div>
-          <label>Date of Service</label>
+          <label>Date</label>
           <input
             name="date"
             type="date"
@@ -171,7 +172,8 @@ function ReservationForm({ service }) {
           />
         </div>
         <div>
-          <label>Start Time, please choose a time after 9:00 AM</label>
+          {/* <label>Start Time, please choose a time after 9:00 AM</label> */}
+          <label>Start Time</label>
           <input
             name="startTime"
             type="time"
@@ -183,7 +185,8 @@ function ReservationForm({ service }) {
           />
         </div>
         <div>
-          <label>Finish Time, please choose a time before 11:00 PM</label>
+          {/* <label>End Time, please choose a time before 11:00 PM</label> */}
+          <label>End Time</label>
           <input
             name="finishTime"
             type="time"
@@ -195,13 +198,14 @@ function ReservationForm({ service }) {
           />
         </div>
         <div>
+          <br />
           <label>
-            Total Price:
+            Price:
             {reservation.startTime && reservation.finishTime
               ? (
-                  ((Number(newFTime) - Number(newSTime)) / 100) *
-                  service.price
-                ).toFixed(2)
+                ((Number(newFTime) - Number(newSTime)) / 100) *
+                service.price
+              ).toFixed(2)
               : 0}
           </label>
         </div>

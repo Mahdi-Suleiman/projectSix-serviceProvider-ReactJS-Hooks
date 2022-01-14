@@ -42,11 +42,12 @@
 
 .room-info-home {
     grid-area: room-desc;
+    margin: 0.5em 0;
 
-    h3 {
-        font-size: 1.5rem;
+    h2 {
+        // font-size: 1.5rem;
         font-weight: 900;
-        margin-bottom: 1rem;
+        margin: 1rem 0;
     }
 }
 
@@ -109,4 +110,22 @@
     .room-desc-home {
         font-size: 0.95rem;
     }
+}
+
+@media screen and (max-width: 480px) {
+    .room-info-home {
+
+        .button-container {
+            display: unset;
+
+            a {
+                display: inline-block;
+                width: 100% !important;
+                margin: 0;
+                transform: translateY(0.5rem);
+            }
+
+        }
+    }
+
 }

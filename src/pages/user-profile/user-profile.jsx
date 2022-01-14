@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./user-profile.css";
+import "./user-profile.scss";
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 
@@ -183,146 +183,12 @@ function Userprofile() {
     <main className="main-cont2" id="form">
       <div className="container2">
         <div className="header2">
-          <h2>Your Profile </h2>
-          <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          <h2>Profile </h2>
+          {/* <button className="logout-btn" onClick={handleLogout}>Logout</button> */}
         </div>
         <div className="double-container">
-          <div className="field-container">
-            <div className="div-container">
-              <h2>Information</h2>
-              <div
-                className="centering-div"
-                style={{ display: firstNameState ? "block" : "none" }}
-              >
-                <label>First name</label>
-                <div className="edit-positioning">
-                  <input
-                    type="text"
-                    defaultValue={firstName}
-                    ref={firstNameInput}
-                  />
-                  <button className="done-btn" onClick={changeFirstNameValue}>
-                    Done
-                  </button>
-                  <button className="done-btn" onClick={changeFirstName}>
-                    X{" "}
-                  </button>
-                </div>
-              </div>
-              <div
-                className="centering-div"
-                style={{ display: firstNameState ? "none" : "block" }}
-              >
-                <label>First name</label>
-                <div className="edit-positioning">
-                  <div className="input-field">{firstName}</div>
-                  {/* <button className="edit-btn" onClick={changeFirstName}>
-                    Edit
-                  </button> */}
-                </div>
-              </div>
-            </div>
-            <div className="div-container">
-              <div
-                className="centering-div"
-                style={{ display: lastNameState ? "block" : "none" }}
-              >
-                <label>Last name</label>
-                <div className="edit-positioning">
-                  <input
-                    type="text"
-                    defaultValue={lastName}
-                    ref={lastNameInput}
-                  />
-                  <button className="done-btn" onClick={changeLastNameValue}>
-                    Done
-                  </button>
-                  <button className="done-btn" onClick={changeLastName}>
-                    X{" "}
-                  </button>
-                </div>
-              </div>
 
-              <div
-                className="centering-div"
-                style={{ display: lastNameState ? "none" : "block" }}
-              >
-                <label>Last name</label>
-                <div className="edit-positioning">
-                  <div className="input-field">{lastName}</div>
-                  {/* <button className="edit-btn" onClick={changeLastName}>
-                    Edit
-                  </button> */}
-                </div>
-              </div>
-            </div>
-
-            <div className="div-container">
-              <div
-                className="centering-div"
-                style={{ display: emailState ? "block" : "none" }}
-              >
-                <label>Email</label>
-                <div className="edit-positioning">
-                  <input type="text" defaultValue={email} ref={emailInput} />
-                  <button className="done-btn" onClick={changeEmailValue}>
-                    Done
-                  </button>
-                  <button className="done-btn" onClick={changeEmail}>
-                    X
-                  </button>
-                </div>
-              </div>
-              <div
-                className="centering-div"
-                style={{ display: emailState ? "none" : "block" }}
-              >
-                <label>Email</label>
-                <div className="edit-positioning">
-                  <div className="input-field">{email}</div>
-                  {/* <button className="edit-btn" onClick={changeEmail}>
-                    Edit
-                  </button> */}
-                </div>
-              </div>
-            </div>
-
-            <div className="div-container">
-              <div
-                className="centering-div"
-                style={{ display: passwordState ? "block" : "none" }}
-              >
-                <label>Password</label>
-                <div className="edit-positioning">
-                  <input
-                    type="password"
-                    defaultValue={password}
-                    ref={passwordInput}
-                  />
-                  {/* TO DO SHOW/ HIDE PASSWORD */}
-                  <button className="done-btn" onClick={changePasswordValue}>
-                    Done
-                  </button>
-                  <button className="done-btn" onClick={changePassword}>
-                    X{" "}
-                  </button>
-                </div>
-              </div>
-              <div
-                className="centering-div"
-                style={{ display: passwordState ? "none" : "block" }}
-              >
-                <label>Password</label>
-                <div className="edit-positioning">
-                  <div className="input-field">{password}</div>
-                  {/* <button className="edit-btn" onClick={changePassword}>
-                    Edit
-                  </button> */}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="test-div">
+          <div className="profile-container-div">
             <h2 >Reservations</h2>
             <table className="user-reservations" >
               <thead>
@@ -358,13 +224,13 @@ function Userprofile() {
               </tbody>
             </table>
           </div>
-          <div className="test-div">
+          <div className="profile-container-div">
             <h2>Cart Items</h2>
             <div className="cart-profile-container">
               {[loggedUser.cartItems.map(item => <div className="cart-item-profile" key={item.id}>
                 <img src={item.image} />
                 <p>{item.title}</p>
-                <p>{item.quantity} * {item.price}</p>
+                <p>{item.quantity} × {item.price}</p>
               </div>)]}</div>
           </div>
         </div>

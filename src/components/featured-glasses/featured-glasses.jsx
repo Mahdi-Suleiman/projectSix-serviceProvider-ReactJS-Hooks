@@ -7,7 +7,7 @@ function FeaturedGlasses() {
   return (
     <div id={'featured-glasses'}>
       <div>
-        <h2 className='generic-title'>Our featured glasses</h2>
+        <h2 className='generic-title'>Best sellers</h2>
         <hr />
       </div>
       <div className='glasses-container-home'>

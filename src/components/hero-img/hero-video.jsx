@@ -1,8 +1,6 @@
 import React from 'react'
-// import "./hero-img.css"
 import './hero-video.scss'
 import video from '../../assets/video2.mp4'
-import { Link } from "react-router-dom"
 import rayban1 from '../../assets/rayban1.png'
 
 function HeroImage() {

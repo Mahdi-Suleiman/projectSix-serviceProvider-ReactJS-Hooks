@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "./detailed-glass.css"
+import "./detailed-glass.scss"
 import { useParams, useNavigate } from "react-router-dom";
 
 function DetailedGlass({ glasses, setLoggedUser }) {

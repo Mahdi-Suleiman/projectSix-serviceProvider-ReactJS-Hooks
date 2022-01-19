@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
-// import { ReactComponent as Logo } from "../../assets/logo_g2a_white.svg";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
 import logo from "../../assets/logo.png";
 import CartDropdown from "../cart-dropdown/cart-dropdown";
 
@@ -30,14 +28,13 @@ const NavBar = (props) => {
   }
 
   return (
-    <header className="header" role={"banner"}>
+    <header className="header" role={"banner"} id='h5h5h' >
       <div onClick={showMenu}>
         <i className="fas fa-bars burgerMenu"></i>
       </div>
 
       <nav className="nav">
         <div className="navCenter">
-          {/* <Link to="/"><Logo className="logo" /></Link> */}
           <Link to="/"><img src={logo} alt="website logo" width={"100px"} /></Link>
         </div>
         <ul className={`${navBarActive ? "activeBurger" : ""} topList`}>
@@ -49,15 +46,23 @@ const NavBar = (props) => {
           <li>
             <Link to="/glasses">Shop</Link>
           </li>
-          {/* <li>
+          <li>
             <Link to="/rooms">Appointment</Link>
-          </li> */}
-          {props.loggedUser ? <div className="sign-out">
-            <li><Link to="/profile">Profile</Link></li>
-            <li onClick={signOut}><Link to="/login">Sign Out</Link></li>
-          </div> : <li>
-            <Link to="/login">Login</Link>
-          </li>}
+          </li>
+          {
+            props.loggedUser ?
+              <div className="sign-out">
+                <li>
+                  <Link to="/profile">Profile</Link>
+                </li>
+                <li onClick={signOut}>
+                  <Link to="/login">Sign Out</Link
+                  ></li>
+              </div> :
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+          }
         </ul>
         {props.loggedUser ? <div className="shoppingCart" onClick={handleHidden}>
           <ShoppingIcon className="shopping-icon" />

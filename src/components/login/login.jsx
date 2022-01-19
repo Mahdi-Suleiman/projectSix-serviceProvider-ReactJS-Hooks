@@ -31,15 +31,15 @@ const Login = (props) => {
 
     let allUsersFromLocalStorage = JSON.parse(localStorage.getItem("users"));
 
-    let flag = false
-    allUsersFromLocalStorage.forEach((acc) => {
-      if (loginInfo.email === acc.email && loginInfo.password === acc.password) {
-        localStorage.setItem("loggedUser", JSON.stringify(acc));
+    let canLogin = false
+    allUsersFromLocalStorage.forEach((user) => {
+      if (loginInfo.email === user.email && loginInfo.password === user.password) {
+        localStorage.setItem("loggedUser", JSON.stringify(user));
         navigate("/");
-        flag = true
+        canLogin = true
       }
     });
-    if (!flag) {
+    if (!canLogin) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -55,11 +55,11 @@ const Login = (props) => {
   return (
     <div className="login-form-container">
       <form onSubmit={handleSubmit} className='login-form'>
-        <h1 className="sign-heading">Sign In</h1>
+        <h1 className="login-heading">Sign In</h1>
         <input onChange={handleChange} value={loginInfo.email} placeholder="Email" type="email" name="email" />
         <input onChange={handleChange} value={loginInfo.password} placeholder="Password" type="password" name="password" />
-        <button className='login-btn' type="submit">Login</button>
-        <p className='dont-have-account'>Don't Have an account? <Link to="/register">Register Here</Link></p>
+        <button className='login-button' type="submit">Login</button>
+        <p className='dont-have-userount'>Don't Have an userount? <Link to="/register">Register Here</Link></p>
       </form>
     </div>
   )

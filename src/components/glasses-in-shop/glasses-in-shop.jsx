@@ -20,12 +20,9 @@ function GlassesShop() {
               <img className="glass-image" src={glass.image} alt={glass.title} />
             </div>
 
-            {/* <h4 className="glass-price">Price: $ {glass.price}</h4> */}
             <div className='glass-button'>
               <Link to={`/glasses/${glass.title}`}>
-                {/* <button className="view-glass-btn"> */}
                 View Glass
-                {/* </button> */}
               </Link>
             </div>
           </div>))

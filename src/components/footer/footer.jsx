@@ -1,7 +1,11 @@
 import React from "react";
+import { useLocation, useParams } from "react-router";
+import { Link } from "react-router-dom";
 import "./footer.scss";
 
 function Footer() {
+  const path = useLocation();
+
   return (
     <footer>
       <div className="footer-container">
@@ -46,10 +50,25 @@ function Footer() {
             <p className="contatUsPara">
               <i className="fas fa-map-marker-alt"></i> Amman - Jordan
             </p>
+            <p className="contatUsPara">
+              <i class="fas fa-phone"></i> +962 777685139
+            </p>
           </div>
         </div>
       </div>
-    </footer>
+      {/* <Link to={`${path.pathname}/#h5h`} className="go-to-top" >
+        <i class="fas fa-arrow-up"></i>
+      </Link> */}
+      <button
+        className="go-to-top"
+        onClick={() => {
+          console.log(path.pathname);
+          window.location.replace("#h5h5h");
+        }
+        }>
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </footer >
   );
 }
 

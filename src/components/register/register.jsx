@@ -4,38 +4,39 @@ import Swal from 'sweetalert2'
 import { useNavigate, Link } from "react-router-dom"
 
 const Register = (props) => {
-
     const navigate = useNavigate()
-    const [allUsersArray, setAllUsersArray] = useState(JSON.parse(localStorage.getItem("users")) ? JSON.parse(localStorage.getItem("users")).length : 0)
-    const [allUsers, setAllUsers] = useState(JSON.parse(localStorage.getItem("users")) ? JSON.parse(localStorage.getItem("users")) : [])
-    const [registerInfo, setRegisterInfo] = useState({
-        firstName: "",
-        lastName: "",
+    const [registeredUsers, setRegisteredUsers] = useState(JSON.parse(localStorage.getItem("users")) ? JSON.parse(localStorage.getItem("users")) : [])
+
+    const [userInformation, setuserInformation] = useState({
+        firstname: "",
+        lastname: "",
         email: "",
         password: "",
         confirmPassword: "",
         appointments: [],
         cartItems: [],
-        id: allUsersArray + 1,
+        id: registeredUsers.length + 1,
     })
-    const [submitted, setSubmitted] = useState(false)
+
+    const [isFormSubmitted, setIsFormSubmitted] = useState(false)
 
     const handleChange = (e) => {
-        setRegisterInfo({ ...registerInfo, [e.target.name]: e.target.value });
+        setuserInformation({ ...userInformation, [e.target.id]: e.target.value });
     }
 
-
     const handleSubmit = (e) => {
-        const { firstName, lastName, email, password, confirmPassword } = registerInfo;
+        const { firstname, lastname, email, password, confirmPassword } = userInformation;
         e.preventDefault();
-        setSubmitted(true)
-        if (!firstName || !lastName || !email || !password || !confirmPassword)
+        setIsFormSubmitted(true)
+        if (!firstname || !lastname || !email || !password || !confirmPassword)
             return;
-        let flag = false;
-        if (firstName.length > 4 && lastName.length > 4 && email && password.length > 4 && password === confirmPassword) {
-            allUsers.forEach(item => {
-                if (item.email === registerInfo.email) {
-                    flag = true;
+        let canRegister = false;
+        if (firstname.length > 4 && lastname.length > 4 && email && password.length > 4 && password === confirmPassword) {
+            canRegister = true;
+            console.log("true");
+
+            registeredUsers.forEach(item => {
+                if (item.email === userInformation.email) {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
@@ -44,22 +45,23 @@ const Register = (props) => {
                     return;
                 }
             })
-            if (!flag) {
-                allUsers.push(registerInfo)
-                localStorage.setItem("users", JSON.stringify(allUsers))
-                localStorage.setItem("loggedUser", JSON.stringify(registerInfo))
-                navigate("/")
-                setAllUsers(JSON.parse(localStorage.getItem("users")))
+
+            if (canRegister) {
+
+                registeredUsers.push(userInformation)
+                localStorage.setItem("users", JSON.stringify(registeredUsers))
+                localStorage.setItem("loggedUser", JSON.stringify(userInformation))
+                setRegisteredUsers(JSON.parse(localStorage.getItem("users")))
                 props.setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
-                setRegisterInfo({
-                    ...registerInfo,
-                    lastName: "",
-                    firstName: "",
+                setuserInformation({
+                    ...userInformation,
+                    lastname: "",
+                    firstname: "",
                     email: "",
                     password: "",
                     confirmPassword: "",
                 })
-
+                navigate("/")
             }
         }
     }
@@ -67,22 +69,60 @@ const Register = (props) => {
         <div className="register-form-container">
             <form onSubmit={handleSubmit} className='register-form'>
                 <h1 className="signup-heading">Register</h1>
-                <input onChange={handleChange} value={registerInfo.firstName} placeholder="First Name" name="firstName" type="text" />
-                {submitted && (registerInfo.firstName.length <= 4 || !registerInfo.firstName) ? <span className="message">Please enter a first name with length of 4 characters or more</span> : null}
+                <input
+                    onChange={handleChange}
+                    id='firstname'
+                    value={userInformation.firstname}
+                    placeholder="First Name"
+                    type="text" />
+                {isFormSubmitted && (userInformation.firstname.length <= 2 || !userInformation.firstname) ?
+                    <small className="error-message">Please enter a first name with length of 2 characters or more</small> :
+                    null}
 
-                <input onChange={handleChange} value={registerInfo.lastName} placeholder="Last Name" type="text" name="lastName" />
-                {(submitted && (registerInfo.lastName.length <= 4 || !registerInfo.lastName)) ? <span className="message">Please enter a last name with length of 4</span> : null}
+                <input
+                    onChange={handleChange}
+                    id='lastname'
+                    value={userInformation.lastname}
+                    placeholder="Last Name"
+                    type="text"
+                />
+                {(isFormSubmitted && (userInformation.lastname.length <= 2 || !userInformation.lastname))
+                    ? <small className="error-message">Please enter a last name with length of 2 characters or more</small>
+                    : null}
 
-                <input onChange={handleChange} value={registerInfo.email} placeholder="Email" type="email" name="email" />
-                {(submitted && !registerInfo.email) ? <span className="message">Please enter an email name</span> : null}
+                <input
+                    onChange={handleChange}
+                    id='email'
+                    value={userInformation.email}
+                    placeholder="Email"
+                    type="email"
+                />
+                {(isFormSubmitted && !userInformation.email) ?
+                    <small className="error-message">Please enter an email</small> :
+                    null}
 
-                <input onChange={handleChange} value={registerInfo.password} placeholder="Password" type="password" name="password" />
-                {(submitted && (registerInfo.password.length <= 4 || !registerInfo.password)) ? <span className="message">Please enter a password with length of 4</span> : null}
+                <input
+                    onChange={handleChange}
+                    id='password'
+                    value={userInformation.password}
+                    placeholder="Password"
+                    type="password"
+                />
+                {(isFormSubmitted && (userInformation.password.length <= 4 || !userInformation.password)) ?
+                    <small className="error-message">Password can't be less than 6 characters</small> :
+                    null}
 
-                <input onChange={handleChange} value={registerInfo.confirmPassword} placeholder="Confirm Password" type="password" name="confirmPassword" />
-                {(submitted && (!registerInfo.confirmPassword || registerInfo.password !== registerInfo.confirmPassword)) ? <span className="message">Please make sure the passwords match</span> : null}
+                <input onChange={handleChange}
+                    id='confirmPassword'
+                    value={userInformation.confirmPassword}
+                    placeholder="Confirm Password"
+                    type="password"
+                />
+                {(isFormSubmitted && (!userInformation.confirmPassword || userInformation.password !== userInformation.confirmPassword)) ?
+                    <small className="error-message">Please make sure passwords match</small> :
+                    null}
 
-                <button type="submit" className='register-btn'>Register</button>
+                <button type="submit" className='register-button'>Register</button>
                 <p className='already-have'>Already have an account <Link to="/login">Login</Link></p>
             </form>
         </div>

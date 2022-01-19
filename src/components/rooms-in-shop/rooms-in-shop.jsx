@@ -1,7 +1,7 @@
 import React from 'react'
 import rooms from '../../data/rooms/rooms'
 import { Link } from "react-router-dom"
-
+import './rooms-in-shop.scss';
 function RoomsShop() {
   return (
     <div>
@@ -9,9 +9,9 @@ function RoomsShop() {
         <h1 className='generic-title'>Our Rooms</h1>
         <hr />
       </div>
-      <div className='glasses-container-home'>
+      <div className='glasses-container-home shop'>
         {rooms.map(room => (
-          <div className="glass-wrapper" key={room.id}>
+          <div className="glass-wrapper shop" key={room.id}>
             <div className="glass-image-wrapper">
               <img className="glass-image" src={room.image} alt={room.title} />
             </div>

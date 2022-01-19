@@ -63,7 +63,7 @@ function Footer() {
         className="go-to-top"
         onClick={() => {
           console.log(path.pathname);
-          window.location.replace("#h5h5h");
+          window.location.replace("#navbar");
         }
         }>
         <i class="fas fa-arrow-up"></i>

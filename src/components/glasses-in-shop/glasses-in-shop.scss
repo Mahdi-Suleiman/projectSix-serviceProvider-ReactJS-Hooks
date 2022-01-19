@@ -1,14 +1,14 @@
 .glasses-container-home {
     display: grid;
-    grid-template-areas: "glass-container glass-container glass-container glass-container";
+    grid-template-areas: "glass-container glass-container glass-container ";
     margin-bottom: 3rem;
 }
 
-// .generic-title {
-    //     text-align: center;
-    //     font-size: 4rem;
-    //     margin-top: 5rem;
-    // }
+.generic-title {
+    text-align: center;
+    font-size: 4rem;
+    margin-top: 5rem;
+}
 
 .glass-wrapper {
     width: 80%;

@@ -11,7 +11,7 @@ function FeaturedGlasses() {
         <hr />
       </div>
       <div className='glasses-container-home'>
-        {glasses.filter((glass, index) => index < 4).map((glass) => (
+        {glasses.filter((glass, index) => index < 3).map((glass) => (
           <div className="glass-wrapper" key={glass.id}>
             <h2 className="glass-title">{glass.title}</h2>
             <div className="glass-image-wrapper">

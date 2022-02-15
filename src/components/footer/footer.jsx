@@ -63,7 +63,12 @@ function Footer() {
         className="go-to-top"
         onClick={() => {
           console.log(path.pathname);
-          window.location.replace("#navbar");
+          // window.location.replace("#navbar");
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
         }
         }>
         <i class="fas fa-arrow-up"></i>

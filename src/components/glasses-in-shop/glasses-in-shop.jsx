@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./glasses-in-shop.scss"
-import glasses from '../../data/glasses/glasses'
+// import glasses from '../../data/glasses/glasses'
 import { Link } from "react-router-dom"
+import axios from 'axios'
 
 function GlassesShop() {
+  const [glasses, setGlasses] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+  const fetchData = async () => {
+    const res = await axios.get('http://127.0.0.1:8000/api/products')
+    const data = res.data
+    console.log(res.data)
+    setGlasses(data)
+  }
+
   return (
     <div>
       <div>
@@ -14,14 +28,14 @@ function GlassesShop() {
         {glasses.map((glass) => (
           <div className="glass-wrapper" key={glass.id}>
             <h2 className="glass-title">
-              {glass.title}
+              {glass.name}
             </h2>
             <div className="glass-image-wrapper">
-              <img className="glass-image" src={glass.image} alt={glass.title} />
+              <img className="glass-image" src={glass.image_url} alt={glass.name} />
             </div>
 
             <div className='glass-button'>
-              <Link to={`/glasses/${glass.title}`}>
+              <Link to={`/glasses/${glass.name}`}>
                 View Glass
               </Link>
             </div>

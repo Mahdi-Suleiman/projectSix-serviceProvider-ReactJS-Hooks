@@ -35,7 +35,8 @@ function GlassesShop() {
             </div>
 
             <div className='glass-button'>
-              <Link to={`/glasses/${glass.name}`}>
+              {/* <Link to={`/glasses/${glass.name}`}> */}
+              <Link to={`/glasses/${glass.id}`}>
                 View Glass
               </Link>
             </div>

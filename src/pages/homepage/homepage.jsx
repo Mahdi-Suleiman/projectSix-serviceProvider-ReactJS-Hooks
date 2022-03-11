@@ -9,7 +9,7 @@ function HomePage() {
         < div id='h5h'>
             <HeroVideo />
             <FeaturedGlasses />
-            <FeaturedAppointments />
+            {/* <FeaturedAppointments /> */}
             <Testimonial />
         </ div>
     )

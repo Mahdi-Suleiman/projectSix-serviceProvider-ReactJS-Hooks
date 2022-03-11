@@ -29,7 +29,8 @@ function App() {
         <Route exact path="/register" element={<Register setLoggedUser={setLoggedUser} />} />
         <Route exact path="/glasses" element={<GlassesShop />} />
         <Route exact path="/rooms" element={<RoomsShop />} />
-        <Route exact path="/glasses/:title" element={<DetailedGlasses glasses={glasses} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />} />
+        {/* <Route exact path="/glasses/:id" element={<DetailedGlasses glasses={glasses} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />} /> */}
+        <Route exact path="/glasses/:id" element={<DetailedGlasses glasses={glasses} loggedUser={loggedUser} setLoggedUser={setLoggedUser} />} />
         <Route exact path="/glasses/:title" element={<DetailedGlasses setLoggedUser={setLoggedUser} />} />
         <Route exact path="/rooms/:title" element={<DetailedRoom rooms={rooms} />} />
         <Route exact path="/cart" element={<Cart setLoggedUser={setLoggedUser} />} />

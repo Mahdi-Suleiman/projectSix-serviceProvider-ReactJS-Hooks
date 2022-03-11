@@ -189,7 +189,7 @@ function Userprofile() {
         <div className="double-container">
 
           <div className="profile-container-div">
-            <h2 >Reservations</h2>
+            {/* <h2 >Reservations</h2>
             <table className="user-reservations" >
               <thead>
                 <tr>
@@ -222,7 +222,7 @@ function Userprofile() {
                   ))
                   : null}
               </tbody>
-            </table>
+            </table> */}
           </div>
           <div className="profile-container-div">
             <h2>Cart Items</h2>

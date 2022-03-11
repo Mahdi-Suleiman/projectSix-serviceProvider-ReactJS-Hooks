@@ -1,15 +1,15 @@
 import React from 'react'
 import "./cart-dropdown-item.css"
 
-function CartDropDownItem({item}) {
+function CartDropDownItem({ item }) {
     return (
         <div className="cart-item">
-        <img src={item.image} alt="item" />
-        <div className="item-details">
-            <span className="item-name">{item.title}</span>
-            <span className="item-price">{item.quantity} x ${item.price}</span>
+            <img src={item.image_url} alt="item" />
+            <div className="item-details">
+                <span className="item-name">{item.name}</span>
+                <span className="item-price">{item.quantity} x ${item.price}</span>
+            </div>
         </div>
-    </div>
     )
 }
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./cart-item.css"
 
 function CartItem({ cartItem, removeItem, addToCart, decreaseQuantity, elemntId }) {
-    const { title, image, price, quantity } = cartItem;
+    const { name, image_url, price, quantity } = cartItem;
     const tempCartCheck = JSON.parse(localStorage.getItem('tempCart'))
     if (!tempCartCheck) {
         const tempCart = [];
@@ -47,9 +47,9 @@ function CartItem({ cartItem, removeItem, addToCart, decreaseQuantity, elemntId 
     return (
         <div className="checkout-item">
             <div className="image-container">
-                <img src={image} alt="item" />
+                <img src={image_url} alt="item" />
             </div>
-            <span className="checkout-name">{title}</span>
+            <span className="checkout-name">{name}</span>
             <span className="quantity">
                 <div className="arrow" onClick={() => decreaseQuantity(cartItem)}>&#10094;</div>
                 <span className="value">{quantity}</span>

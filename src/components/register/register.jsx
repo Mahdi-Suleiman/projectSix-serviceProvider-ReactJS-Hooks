@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import "./register.scss"
 import Swal from 'sweetalert2'
 import { useNavigate, Link } from "react-router-dom"
+import axios from 'axios'
 
 const Register = (props) => {
     const navigate = useNavigate()
     const [registeredUsers, setRegisteredUsers] = useState(JSON.parse(localStorage.getItem("users")) ? JSON.parse(localStorage.getItem("users")) : [])
 
     const [userInformation, setuserInformation] = useState({
-        firstname: "",
-        lastname: "",
+        // firstname: "",
+        name: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -24,14 +25,14 @@ const Register = (props) => {
         setuserInformation({ ...userInformation, [e.target.id]: e.target.value });
     }
 
-    const handleSubmit = (e) => {
-        const { firstname, lastname, email, password, confirmPassword } = userInformation;
+    const handleSubmit = async (e) => {
+        const { name, email, password, confirmPassword } = userInformation;
         e.preventDefault();
         setIsFormSubmitted(true)
-        if (!firstname || !lastname || !email || !password || !confirmPassword)
+        if (!name || !email || !password || !confirmPassword)
             return;
         let canRegister = false;
-        if (firstname.length > 4 && lastname.length > 4 && email && password.length > 4 && password === confirmPassword) {
+        if (name.length > 2 && email && password.length >= 8 && password === confirmPassword) {
             canRegister = true;
             console.log("true");
 
@@ -50,13 +51,22 @@ const Register = (props) => {
 
                 registeredUsers.push(userInformation)
                 localStorage.setItem("users", JSON.stringify(registeredUsers))
-                localStorage.setItem("loggedUser", JSON.stringify(userInformation))
+                const response = await axios.post('http://127.0.0.1:8000/api/users/register', userInformation)
+                const user = response.data
+                console.log(user)
+                const localStorageUser = {
+                    ...user,
+                    appointments: [],
+                    cartItems: []
+                }
+                localStorage.setItem('loggedUser', JSON.stringify(localStorageUser))
+                // localStorage.setItem("loggedUser", JSON.stringify(userInformation))
                 setRegisteredUsers(JSON.parse(localStorage.getItem("users")))
                 props.setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
                 setuserInformation({
                     ...userInformation,
-                    lastname: "",
-                    firstname: "",
+                    name: "",
+                    // firstname: "",
                     email: "",
                     password: "",
                     confirmPassword: "",
@@ -69,7 +79,7 @@ const Register = (props) => {
         <div className="register-form-container">
             <form onSubmit={handleSubmit} className='register-form'>
                 <h1 className="signup-heading">Register</h1>
-                <input
+                {/* <input
                     onChange={handleChange}
                     id='firstname'
                     value={userInformation.firstname}
@@ -77,17 +87,17 @@ const Register = (props) => {
                     type="text" />
                 {isFormSubmitted && (userInformation.firstname.length <= 2 || !userInformation.firstname) ?
                     <small className="error-message">Please enter a first name with length of 2 characters or more</small> :
-                    null}
+                    null} */}
 
                 <input
                     onChange={handleChange}
-                    id='lastname'
-                    value={userInformation.lastname}
-                    placeholder="Last Name"
+                    id='name'
+                    value={userInformation.name}
+                    placeholder="Name"
                     type="text"
                 />
-                {(isFormSubmitted && (userInformation.lastname.length <= 2 || !userInformation.lastname))
-                    ? <small className="error-message">Please enter a last name with length of 2 characters or more</small>
+                {(isFormSubmitted && (userInformation.name.length <= 2 || !userInformation.name))
+                    ? <small className="error-message">Please enter a name with length of 2 characters or more</small>
                     : null}
 
                 <input
@@ -108,8 +118,8 @@ const Register = (props) => {
                     placeholder="Password"
                     type="password"
                 />
-                {(isFormSubmitted && (userInformation.password.length <= 4 || !userInformation.password)) ?
-                    <small className="error-message">Password can't be less than 6 characters</small> :
+                {(isFormSubmitted && (userInformation.password.length <= 7 || !userInformation.password)) ?
+                    <small className="error-message">Password can't be less than 8 characters</small> :
                     null}
 
                 <input onChange={handleChange}

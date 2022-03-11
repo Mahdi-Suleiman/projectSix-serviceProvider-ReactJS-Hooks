@@ -29,7 +29,7 @@ const Login = (props) => {
         appointments: [],
         cartItems: []
       }
-      localStorage.setItem('LoggedUser', JSON.stringify(localStorageUser))
+      localStorage.setItem('loggedUser', JSON.stringify(localStorageUser))
       // props.setLoggedUser(JSON.parse(localStorage.getItem("loggedUser")))
       props.setLoggedUser(user)
     } else {

@@ -5,7 +5,6 @@ function Coupon() {
     const [couponAmount, setCouponAmount] = useState("");
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("loggedUser")));
     const [totalPrice, setTotalPrice] = useState(user.cartItems.reduce((total, item) => total + item.quantity * item.price, 0))
-
     const handleCouponChange = (e) => {
         setCouponAmount(e.target.value);
     }
@@ -19,9 +18,7 @@ function Coupon() {
 
             } else {
                 alert("wrong coupoun");
-
             }
-
         } else {
             alert("wrong coupoun");
         }

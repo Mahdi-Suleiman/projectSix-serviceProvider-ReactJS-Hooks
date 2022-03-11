@@ -16,6 +16,7 @@ function DetailedGlass({ glasses, loggedUser, setLoggedUser }) {
       )
       if (existingCartItem) {
         loggedUser.cartItems.map(cartItem => cartItem.id === item.id ? cartItem.quantity += 1 : cartItem)
+
         localStorage.setItem("loggedUser", JSON.stringify(loggedUser))
         const allUsers = JSON.parse(localStorage.getItem("users"));
         const filteredAllUsers = allUsers.filter((user) => loggedUser.id !== user.id);

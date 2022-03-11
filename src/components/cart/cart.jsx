@@ -6,8 +6,7 @@ import CartItem from '../cart-item/cart-item'
 function Cart({ setLoggedUser }) {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("loggedUser")));
     const removeItem = (item) => {
-        const existingCartItem = user.cartItems.find(
-            cartItem => cartItem.id === item.id)
+        const existingCartItem = user.cartItems.find(cartItem => cartItem.id === item.id)
         user.cartItems.splice(user.cartItems.indexOf(existingCartItem), 1)
         localStorage.setItem("loggedUser", JSON.stringify(user))
         const allUsers = JSON.parse(localStorage.getItem("users"));
@@ -90,7 +89,7 @@ function Cart({ setLoggedUser }) {
                 <h1>Your Cart Is Empty</h1>
                 <Link to="/glasses"><button type="button" className="go-to-shop">Go To Shop</button></Link>
             </div>}
-            {user.cartItems.map(element => <CartItem key={element.id} cartItem={element} removeItem={removeItem} decreaseQuantity={decreaseQuantity} addToCart={addToCart} />)}
+            {user.cartItems.map(element => <CartItem key={element.id} cartItem={element} removeItem={removeItem} decreaseQuantity={decreaseQuantity} addToCart={addToCart} elemntId={element.id} />)}
             {user.cartItems.length ? <div className="total">
                 <span>Total: ${user.cartItems.reduce((total, item) => total + item.quantity * item.price, 0)}</span>
                 <Link to="/checkout"><button type="button" className="confirm-buy">Go to Checkout</button></Link>

@@ -39,7 +39,7 @@ const NavBar = (props) => {
         </div>
         <ul className={`${navBarActive ? "activeBurger" : ""} topList`}>
           <li>
-            <Link className="active" to="/">
+            <Link to="/">
               Home
             </Link>
           </li>
